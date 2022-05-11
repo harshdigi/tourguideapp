@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "430180915302",
+    "firebase_url": "https://tour-guide-mit-default-rtdb.firebaseio.com",
+    "project_id": "tour-guide-mit",
+    "storage_bucket": "tour-guide-mit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430180915302:android:5ee33efb7fd5c33a09b5a7",
+        "android_client_info": {
+          "package_name": "in.digitaldealsolution.bharatdarshan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430180915302-728hu88s11rbesmo1d5ad5fpi72jnk57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG723JtdblXTvi26OhDfSy_Z8xcTQ6Qsg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430180915302-728hu88s11rbesmo1d5ad5fpi72jnk57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

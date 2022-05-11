@@ -29,6 +29,7 @@ public class SplashScreen extends AppCompatActivity {
             Intent intent;
             if(isFirstTime){
                 intent = new Intent(SplashScreen.this, OnboardingActivity.class);
+                mSahredPref.edit().putBoolean("firstTime", false).commit();
             }
             else{
                 intent = new Intent(SplashScreen.this, MainActivity.class);
