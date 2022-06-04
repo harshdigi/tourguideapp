@@ -1,19 +1,19 @@
 package in.digitaldealsolution.bharatdarshan;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import in.digitaldealsolution.bharatdarshan.Adapter.OnboardingAdapter;
-import in.digitaldealsolution.bharatdarshan.Fragment.Onboarding2Fragment;
 import in.digitaldealsolution.bharatdarshan.Fragment.Onboarding1Fragment;
+import in.digitaldealsolution.bharatdarshan.Fragment.Onboarding2Fragment;
 import in.digitaldealsolution.bharatdarshan.Fragment.Onboarding3Fragment;
 
 public class OnboardingActivity extends AppCompatActivity {

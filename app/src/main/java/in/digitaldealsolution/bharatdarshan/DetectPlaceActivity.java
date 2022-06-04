@@ -1,21 +1,19 @@
 package in.digitaldealsolution.bharatdarshan;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.Interpreter;
@@ -34,7 +32,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -56,21 +53,21 @@ public class DetectPlaceActivity extends AppCompatActivity {
     ImageView imageView;
     Uri imageuri;
     Button buclassify;
-
+    private TextView classifytext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detect_place);
-        imageView=(ImageView)findViewById(R.id.image);
-        buclassify=(Button)findViewById(R.id.classify);
-
+        imageView = findViewById(R.id.image);
+        buclassify = findViewById(R.id.classify);
+        classifytext = findViewById(R.id.placetext);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Picture"),12);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 12);
 
             }
         });
@@ -147,22 +144,22 @@ public class DetectPlaceActivity extends AppCompatActivity {
     private void showresult(){
 
         try{
-            labels = FileUtil.loadLabels(DetectPlaceActivity.this,"labels.txt");
-        }catch (Exception e){
+            labels = FileUtil.loadLabels(DetectPlaceActivity.this, "labels.txt");
+        } catch (Exception e) {
             e.printStackTrace();
         }
         Map<String, Float> labeledProbability =
                 new TensorLabel(labels, probabilityProcessor.process(outputProbabilityBuffer))
                         .getMapWithFloatValue();
-        float maxValueInMap =(Collections.max(labeledProbability.values()));
-
+        float maxValueInMap = (Collections.max(labeledProbability.values()));
+        float minProbabilityThreshold = (float) 1.0;
         for (Map.Entry<String, Float> entry : labeledProbability.entrySet()) {
-            //if (entry.getValue()==maxValueInMap) {
-            String[] label = labeledProbability.keySet().toArray(new String[0]);
-            Float[] label_probability = labeledProbability.values().toArray(new Float[0]);
-            Log.d("Place", label + "=" + String.valueOf(label_probability));
-
-            //           }
+            if (entry.getValue() == maxValueInMap && maxValueInMap >= minProbabilityThreshold) {
+                classifytext.setText(entry.getKey());
+            }
+        }
+        if (maxValueInMap < minProbabilityThreshold) {
+            classifytext.setText("Unknown Place");
         }
     }
 
